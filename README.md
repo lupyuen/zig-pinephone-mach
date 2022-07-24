@@ -186,4 +186,14 @@ error: VersionUnavailable
 
 # Pinebook Pro
 
-TODO: Will Mach run on Pinebook Pro?
+Will Mach run on Pinebook Pro?
+
+We run the same steps to build Mach on Pinebook Pro (Manjaro Xfce)...
+
+https://github.com/lupyuen/zig-pinephone-mach#build-mach
+
+And apply the fix for Missing Arm64 Atomics...
+
+https://github.com/lupyuen/zig-pinephone-mach#missing-arm64-atomics
+
+TODO
