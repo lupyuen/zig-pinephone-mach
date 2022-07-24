@@ -79,114 +79,25 @@ extern fn printf(format: [*:0]const u8, ...) c_int;
 extern fn puts(str: [*:0]const u8) c_int;
 ```
 
-# Mach Crashes
+# GLFW Error
 
-After fixing, mach builds OK but crashes when we run it...
+After fixing, mach builds OK but fails with a GLFW Error when we run it...
 
 ```text
+$ zig build example-rotating-cube -Ddawn-from-source=true
 $ export GPU_BACKEND=opengl
 $ zig-out/bin/example-rotating-cube
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=0
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f18, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=1
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f28, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=2
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f38, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=3
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f58, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=4
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f68, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=5
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f78, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=6
-__aarch64_ldadd8_relax: x=1, p=0x4eb3f98, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=7
-__aarch64_ldadd8_relax: x=1, p=0x4eb3fa8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=8
-__aarch64_ldadd8_relax: x=1, p=0x4eb3fb8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=9
-__aarch64_ldadd8_relax: x=1, p=0x4eb3fc8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=10
-__aarch64_ldadd8_relax: x=1, p=0x4eb3fd8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=11
-__aarch64_ldadd8_relax: x=1, p=0x4eb4008, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=12
-__aarch64_ldadd8_relax: x=1, p=0x4eb4038, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=13
-__aarch64_ldadd8_relax: x=1, p=0x4eb4048, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=14
-__aarch64_ldadd8_relax: x=1, p=0x4eb4058, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=15
-__aarch64_ldadd8_relax: x=1, p=0x4eb4068, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=16
-__aarch64_ldadd8_relax: x=1, p=0x4eb4078, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=17
-__aarch64_ldadd8_relax: x=1, p=0x4eb4088, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=18
-__aarch64_ldadd8_relax: x=1, p=0x4eb4098, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=19
-__aarch64_ldadd8_relax: x=1, p=0x4eb40a8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=20
-__aarch64_ldadd8_relax: x=1, p=0x4eb40b8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=21
-__aarch64_ldadd8_relax: x=1, p=0x4eb40c8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=22
-__aarch64_ldadd8_relax: x=1, p=0x4eb40d8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=23
-__aarch64_ldadd8_relax: x=1, p=0x4eb40e8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=24
-__aarch64_ldadd8_relax: x=1, p=0x4eb40f8, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=25
-__aarch64_ldadd8_relax: x=1, p=0x4eb4118, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=26
-__aarch64_ldadd8_relax: x=1, p=0x4eb4138, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=27
-__aarch64_ldadd8_relax: x=1, p=0x4eb4158, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=28
-__aarch64_ldadd8_relax: x=1, p=0x4eb4178, ret=0
-__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=29
-__aarch64_ldadd8_relax: x=1, p=0x4eb4188, ret=0
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=0
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=1
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=2
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=3
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=2
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=3
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=4
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=5
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=4
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=5
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=6
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=7
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=6
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=7
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=8
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=9
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=10
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=9
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=10
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=11
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=12
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=11
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=12
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=13
-__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=14
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=13
-__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=14
-glfw: error.VersionUnavailable: EGL: Failed to create context: Arguments are inconsistent
-error(gpa): memory address 0xffffbf178000 leaked: 
-???:?:?: 0x2c9d143 in ??? (???)
-???:?:?: 0x2c9cdff in ??? (???)
-???:?:?: 0x2c9dc8b in ??? (???)
-???:?:?: 0xffffbed77b7f in ??? (???)
-
-
+glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
 error: VersionUnavailable
-???:?:?: 0x2cadbd7 in ??? (???)
-???:?:?: 0x2ca2cd3 in ??? (???)
-???:?:?: 0x2ca2e33 in ??? (???)
-???:?:?: 0x2ca2ec3 in ??? (???)
-???:?:?: 0x2ca1a93 in ??? (???)
-???:?:?: 0x2c9d1df in ??? (???)
-???:?:?: 0x2c9ce27 in ??? (???)
+```
+
+[(See complete log)](https://gist.github.com/lupyuen/700efb3b25463bc042ce9e23169efb18)
+
+# OpenGL Version
+
+PinePhone supports OpenGL version 2.1...
+
+```text
+$ glxinfo | grep "OpenGL version"
+OpenGL version string: 2.1 Mesa 22.1.3
 ```
