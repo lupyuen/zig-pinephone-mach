@@ -8,9 +8,26 @@ https://github.com/hexops/mach
 
 Let's find out! (With Manjaro Phosh)
 
+```text
+██████████████████  ████████   manjaro@manjaro-arm 
+██████████████████  ████████   ------------------- 
+██████████████████  ████████   OS: Manjaro ARM Linux aarch64 
+██████████████████  ████████   Host: Pine64 PinePhone (1.2) 
+████████            ████████   Kernel: 5.18.3-1-MANJARO-ARM 
+████████  ████████  ████████   Uptime: 1 hour, 48 mins 
+████████  ████████  ████████   Packages: 806 (pacman) 
+████████  ████████  ████████   Shell: bash 5.1.16 
+████████  ████████  ████████   Resolution: 720x1440 
+████████  ████████  ████████   Terminal: node 
+████████  ████████  ████████   CPU: (4) @ 1.152GHz 
+████████  ████████  ████████   Memory: 507MiB / 1991MiB 
+████████  ████████  ████████
+████████  ████████  ████████       
+```
+
 # Build Mach
 
-Follow these steps to download Zig, download Mach and build Mach...
+Follow these steps to download Zig, download Mach and build Mach on PinePhone...
 
 ```bash
 $ curl -O -L https://ziglang.org/builds/zig-linux-aarch64-0.10.0-dev.3080+eb1b2f5c5.tar.xz
@@ -123,7 +140,7 @@ extern fn printf(format: [*:0]const u8, ...) c_int;
 extern fn puts(str: [*:0]const u8) c_int;
 ```
 
-After fixing, Mach builds OK...
+After fixing, Mach builds OK on PinePhone...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -131,7 +148,7 @@ $ zig build example-rotating-cube -Ddawn-from-source=true
 
 # GLFW Error
 
-Mach fails with a GLFW Error when we run it...
+When we run Mach on PinePhone, it fails with a GLFW Error...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -147,14 +164,14 @@ Which might be caused by the OpenGL Version on PinePhone...
 
 # OpenGL Version
 
-PinePhone supports OpenGL version 2.1, which is rather old...
+PinePhone supports OpenGL version 2.1, which might be too old for Mach...
 
 ```text
 $ glxinfo | grep "OpenGL version"
 OpenGL version string: 2.1 Mesa 22.1.3
 ```
 
-Overriding the OpenGL version doesn't help, we get the same error...
+Overriding the OpenGL version doesn't help, we get the same error when we run Mach on PinePhone...
 
 ```bash
 $ export MESA_GL_VERSION_OVERRIDE=4.3
