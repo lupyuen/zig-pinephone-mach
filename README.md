@@ -121,7 +121,11 @@ extern fn printf(format: [*:0]const u8, ...) c_int;
 extern fn puts(str: [*:0]const u8) c_int;
 ```
 
-After fixing, mach builds OK.
+After fixing, mach builds OK...
+
+```bash
+$ zig build example-rotating-cube -Ddawn-from-source=true
+```
 
 # GLFW Error
 
