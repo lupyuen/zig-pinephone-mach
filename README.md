@@ -175,7 +175,7 @@ $ glxinfo | grep "OpenGL version"
 OpenGL version string: 2.1 Mesa 22.1.3
 ```
 
-Mach fails with a GLSL Error when we set `MESA_GL_VERSION_OVERRIDE`...
+When we set `MESA_GL_VERSION_OVERRIDE`, Mach fails with a GLSL Error ...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -215,7 +215,7 @@ const pipeline_descriptor = gpu.RenderPipeline.Descriptor{
 
 [(Source)](https://github.com/hexops/mach/blob/main/examples/rotating-cube/main.zig#L87-L107)
 
-Because PinePhone failed to load the OpenGL Shading Language (GLSL) file [vert.wgsl](https://github.com/hexops/mach/blob/main/examples/rotating-cube/vert.wgsl).
+Because PinePhone failed to load the [OpenGL Shading Language](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language) (GLSL) file [vert.wgsl](https://github.com/hexops/mach/blob/main/examples/rotating-cube/vert.wgsl).
 
 This GLSL Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.4 or above.
 
@@ -254,7 +254,7 @@ glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
 
 [(See the complete log)](https://gist.github.com/lupyuen/46d5e398fad09ec498d8c9c93d82e03a)
 
-And it fails with the same GLSL Error when we set `MESA_GL_VERSION_OVERRIDE`...
+When we set `MESA_GL_VERSION_OVERRIDE`, Mach fails with the same GLSL Error...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
