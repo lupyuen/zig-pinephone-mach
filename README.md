@@ -4,7 +4,7 @@ Can we run the Mach Game Engine (in Zig) on PinePhone?
 
 https://machengine.org/
 
-Let's find out!
+Let's find out! (With Manjaro Phosh)
 
 # Build Mach
 
@@ -25,7 +25,7 @@ Be patient, it takes roughly 1.5 hours for the first build. Subsequent builds wi
 
 # Missing Arm64 Atomics
 
-The build fails with Missing Arm64 Atomics...
+Mach fails to build on PinePhone due to Missing Arm64 Atomics...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -56,7 +56,7 @@ https://docs.rs/atomic/latest/atomic/struct.Atomic.html
 
 # Fixing Missing Arm64 Atomics
 
-Apply this fix for the Missing Arm64 Atomics...
+To build Mach correctly on PinePhone, apply this fix for the Missing Arm64 Atomics...
 
 ```zig
 //// TODO: To fix the Missing Atomics for Mach Zig Game Engine on PinePhone Manjaro Phosh,
@@ -121,7 +121,7 @@ extern fn printf(format: [*:0]const u8, ...) c_int;
 extern fn puts(str: [*:0]const u8) c_int;
 ```
 
-After fixing, mach builds OK...
+After fixing, Mach builds OK...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -129,7 +129,7 @@ $ zig build example-rotating-cube -Ddawn-from-source=true
 
 # GLFW Error
 
-mach fails with a GLFW Error when we run it...
+Mach fails with a GLFW Error when we run it...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -141,9 +141,11 @@ error: VersionUnavailable
 
 [(See complete log)](https://gist.github.com/lupyuen/700efb3b25463bc042ce9e23169efb18)
 
+Which might be caused by the OpenGL Version on PinePhone...
+
 # OpenGL Version
 
-PinePhone supports OpenGL version 2.1...
+PinePhone supports OpenGL version 2.1, which is rather old...
 
 ```text
 $ glxinfo | grep "OpenGL version"
