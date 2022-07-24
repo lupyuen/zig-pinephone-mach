@@ -152,10 +152,14 @@ When we run Mach on PinePhone, it fails with a GLFW Error...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
+
 $ export GPU_BACKEND=opengl
 $ zig-out/bin/example-rotating-cube
 glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
-error: VersionUnavailable
+
+$ export GPU_BACKEND=opengles
+$ zig-out/bin/example-rotating-cube
+glfw: error.VersionUnavailable: EGL: Failed to create context: An EGLConfig argument does not name a valid EGL frame buffer configuration
 ```
 
 [(See complete log)](https://gist.github.com/lupyuen/700efb3b25463bc042ce9e23169efb18)
@@ -181,7 +185,6 @@ OpenGL version string: 4.3 (Compatibility Profile) Mesa 22.1.3
 $ export GPU_BACKEND=opengl
 $ zig-out/bin/example-rotating-cube
 glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
-error: VersionUnavailable
 ```
 
 # Pinebook Pro
