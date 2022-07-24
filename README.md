@@ -203,4 +203,10 @@ https://github.com/lupyuen/zig-pinephone-mach#missing-arm64-atomics
 
 (Mach builds on Pinebook Pro in roughly half an hour)
 
-TODO
+Mach also fails with a GLFW Error on Pinebook Pro...
+
+```bash
+$ export GPU_BACKEND=opengl
+$ zig-out/bin/example-rotating-cube
+glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
+```
