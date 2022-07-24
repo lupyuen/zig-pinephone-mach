@@ -84,37 +84,109 @@ extern fn puts(str: [*:0]const u8) c_int;
 After fixing, mach builds OK but crashes when we run it...
 
 ```text
-$ zig build example-rotating-cube -Ddawn-from-source=true
-$ ./zig-out/bin/example-rotating-cube 
-__aarch64_ldadd4_acq_rel
-__aarch64_ldadd8_relax
-__aarch64_ldadd4_acq_rel
-__aarch64_ldadd8_relax
-__aarch64_ldadd8_acq_rel
-free(): invalid pointer
-Aborted (core dumped)
-```
+$ export GPU_BACKEND=opengl
+$ zig-out/bin/example-rotating-cube
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=0
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f18, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=1
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f28, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=2
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f38, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=3
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f58, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=4
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f68, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=5
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f78, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=6
+__aarch64_ldadd8_relax: x=1, p=0x4eb3f98, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=7
+__aarch64_ldadd8_relax: x=1, p=0x4eb3fa8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=8
+__aarch64_ldadd8_relax: x=1, p=0x4eb3fb8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=9
+__aarch64_ldadd8_relax: x=1, p=0x4eb3fc8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=10
+__aarch64_ldadd8_relax: x=1, p=0x4eb3fd8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=11
+__aarch64_ldadd8_relax: x=1, p=0x4eb4008, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=12
+__aarch64_ldadd8_relax: x=1, p=0x4eb4038, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=13
+__aarch64_ldadd8_relax: x=1, p=0x4eb4048, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=14
+__aarch64_ldadd8_relax: x=1, p=0x4eb4058, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=15
+__aarch64_ldadd8_relax: x=1, p=0x4eb4068, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=16
+__aarch64_ldadd8_relax: x=1, p=0x4eb4078, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=17
+__aarch64_ldadd8_relax: x=1, p=0x4eb4088, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=18
+__aarch64_ldadd8_relax: x=1, p=0x4eb4098, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=19
+__aarch64_ldadd8_relax: x=1, p=0x4eb40a8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=20
+__aarch64_ldadd8_relax: x=1, p=0x4eb40b8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=21
+__aarch64_ldadd8_relax: x=1, p=0x4eb40c8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=22
+__aarch64_ldadd8_relax: x=1, p=0x4eb40d8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=23
+__aarch64_ldadd8_relax: x=1, p=0x4eb40e8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=24
+__aarch64_ldadd8_relax: x=1, p=0x4eb40f8, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=25
+__aarch64_ldadd8_relax: x=1, p=0x4eb4118, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=26
+__aarch64_ldadd8_relax: x=1, p=0x4eb4138, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=27
+__aarch64_ldadd8_relax: x=1, p=0x4eb4158, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=28
+__aarch64_ldadd8_relax: x=1, p=0x4eb4178, ret=0
+__aarch64_ldadd4_acq_rel: x=1, p=0x4eb3550, ret=29
+__aarch64_ldadd8_relax: x=1, p=0x4eb4188, ret=0
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=0
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=1
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=2
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=3
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=2
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=3
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=4
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=5
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=4
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=5
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=6
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=7
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=6
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=7
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=8
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=9
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=10
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=9
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=10
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=11
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=12
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=11
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=12
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=13
+__aarch64_ldadd8_acq_rel: x=-1, p=0x4eb4198, ret=14
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=13
+__aarch64_ldadd8_relax: x=1, p=0x4eb4198, ret=14
+glfw: error.VersionUnavailable: EGL: Failed to create context: Arguments are inconsistent
+error(gpa): memory address 0xffffbf178000 leaked: 
+???:?:?: 0x2c9d143 in ??? (???)
+???:?:?: 0x2c9cdff in ??? (???)
+???:?:?: 0x2c9dc8b in ??? (???)
+???:?:?: 0xffffbed77b7f in ??? (???)
 
-GDB Stack Trace shows that it's crashing in streambuf...
 
-```text
-(gdb) bt
-#0  0x0000fffff7c52790 in ?? () from /lib/libc.so.6
-#1  0x0000fffff7c0b6fc in raise () from /lib/libc.so.6
-#2  0x0000fffff7bf78b0 in abort () from /lib/libc.so.6
-#3  0x0000fffff7c4633c in ?? () from /lib/libc.so.6
-#4  0x0000fffff7c5cf1c in ?? () from /lib/libc.so.6
-#5  0x0000fffff7c5ee38 in ?? () from /lib/libc.so.6
-#6  0x0000fffff7c61a68 in free () from /lib/libc.so.6
-#7  0x0000000004de9cd4 in std::__1::__shared_count::__release_shared() ()
-#8  0x0000000004de1424 in void std::__1::locale::__imp::install<std::__1::collate<wchar_t> >(std::__1::collate<wchar_t>*) ()
-#9  0x0000000004dbc2a4 in std::__1::locale::__imp::__imp(unsigned long) ()
-#10 0x0000000004dbdd68 in std::__1::locale::__imp::make_global() ()
-#11 0x0000000004dbde7c in std::__1::locale::locale() ()
-#12 0x0000000004db7d64 in std::__1::basic_streambuf<char, std::__1::char_traits<char> >::basic_streambuf() ()
-#13 0x0000000004dbaabc in std::__1::DoIOSInit::DoIOSInit() ()
-#14 0x0000000004dbbe0c in global constructors keyed to 000100 ()
-#15 0x0000000004dfa318 in __libc_csu_init ()
-#16 0x0000fffff7bf7c3c in __libc_start_main () from /lib/libc.so.6
-#17 0x0000000002c92344 in _start ()
+error: VersionUnavailable
+???:?:?: 0x2cadbd7 in ??? (???)
+???:?:?: 0x2ca2cd3 in ??? (???)
+???:?:?: 0x2ca2e33 in ??? (???)
+???:?:?: 0x2ca2ec3 in ??? (???)
+???:?:?: 0x2ca1a93 in ??? (???)
+???:?:?: 0x2c9d1df in ??? (???)
+???:?:?: 0x2c9ce27 in ??? (???)
 ```
