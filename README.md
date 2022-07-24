@@ -8,7 +8,7 @@ Let's find out!
 
 # Build Mach
 
-Follow these steps to install Zig, download Mach and build Mach...
+Follow these steps to download Zig, download Mach and build Mach...
 
 https://gist.github.com/lupyuen/ff77c494b0589371b44b6c96f8491e31
 
@@ -20,7 +20,7 @@ https://gist.github.com/lupyuen/7cbea20f5be8efa65b971dc2a01374c4
 
 # Mach Crashes
 
-After fixing, mach builds OK but crashes...
+After fixing, mach builds OK but crashes when we run it...
 
 ```text
 $ zig build example-rotating-cube -Ddawn-from-source=true
