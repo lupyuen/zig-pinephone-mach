@@ -164,3 +164,7 @@ $ zig-out/bin/example-rotating-cube
 glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
 error: VersionUnavailable
 ```
+
+# Pinebook Pro
+
+TODO: Will Mach run on Pinebook Pro?
