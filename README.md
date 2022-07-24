@@ -199,4 +199,6 @@ And apply the fix for Missing Arm64 Atomics...
 
 https://github.com/lupyuen/zig-pinephone-mach#missing-arm64-atomics
 
+(Mach builds on Pinebook Pro in roughly half an hour)
+
 TODO
