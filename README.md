@@ -195,9 +195,33 @@ Program compilation failed:
 
 [(See the complete log)](https://gist.github.com/lupyuen/9d3aca0d10cc6dfee0a7d3e50f14e191)
 
+This says that Mach failed to create the GPU Render Pipeline...
+
+```zig
+const vs_module = core.device.createShaderModule(&.{
+    .label = "my vertex shader",
+    .code = .{ .wgsl = @embedFile("vert.wgsl") },
+});
+
+const pipeline_descriptor = gpu.RenderPipeline.Descriptor{
+    .fragment = &fragment,
+    .layout = pipeline_layout,
+    .depth_stencil = null,
+    .vertex = .{
+        .module = vs_module,
+        .entry_point = "main",
+        .buffers = &.{vertex_buffer_layout},
+```
+
+[(Source)](https://github.com/hexops/mach/blob/main/examples/rotating-cube/main.zig#L87-L107)
+
+Because PinePhone failed to load the OpenGL Shading Language (GLSL) file [vert.wgsl](https://github.com/hexops/mach/blob/main/examples/rotating-cube/vert.wgsl).
+
 This GLSL Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.4 or above.
 
 The GLFW Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.3 or below.
+
+So it seems Mach only works with OpenGL / GLSL version 4.4 and above. Which isn't supported on PinePhone.
 
 # Pinebook Pro
 
@@ -215,7 +239,7 @@ https://github.com/lupyuen/zig-pinephone-mach#missing-arm64-atomics
 
 (Mach builds on Pinebook Pro in roughly half an hour)
 
-Mach fails with the same GLFW Error on Pinebook Pro...
+Mach fails with the same GLFW Error on Pinebook Pro even though it supports OpenGL 3.1...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -230,7 +254,7 @@ glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
 
 [(See the complete log)](https://gist.github.com/lupyuen/46d5e398fad09ec498d8c9c93d82e03a)
 
-And it fails when we set `MESA_GL_VERSION_OVERRIDE`...
+And it fails with the same GLSL Error when we set `MESA_GL_VERSION_OVERRIDE`...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -249,3 +273,5 @@ Program compilation failed:
 ```
 
 [(See the complete log)](https://gist.github.com/lupyuen/849491f0aef2b8ad67e8ab1ce250f067)
+
+So it seems Mach won't run on Pinebook Pro because it doesn't support OpenGL / GLSL version 4.4 or later.
