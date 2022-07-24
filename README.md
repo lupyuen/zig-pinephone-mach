@@ -146,31 +146,9 @@ After fixing, Mach builds OK on PinePhone...
 $ zig build example-rotating-cube -Ddawn-from-source=true
 ```
 
-# GLSL Error
-
-When we run Mach on PinePhone with `MESA_GL_VERSION_OVERRIDE`, it fails with a GLSL Error...
-
-```bash
-$ zig build example-rotating-cube -Ddawn-from-source=true
-
-$ export GPU_BACKEND=opengl
-$ export MESA_GL_VERSION_OVERRIDE=4.5
-$ glxinfo | grep 'OpenGL version'
-OpenGL version string: 4.5 (Compatibility Profile) Mesa 22.1.3
-
-$ zig-out/bin/example-rotating-cube
-mach: found OpenGL backend on Unknown adapter: Mali400, OpenGL version 4.5 (Core Profile) Mesa 22.1.3
-gpu: validation error: #version 450
-Program compilation failed:
-0:1(10): error: GLSL 4.50 is not supported. Supported versions are: 1.10, 1.20, and 1.00 ES
- - While calling [Device].CreateRenderPipeline([RenderPipelineDescriptor]).
-```
-
-[(See the complete log)](https://gist.github.com/lupyuen/9d3aca0d10cc6dfee0a7d3e50f14e191)
-
 # GLFW Error
 
-When we run Mach on PinePhone without `MESA_GL_VERSION_OVERRIDE`, it fails with a GLFW Error...
+When we run Mach on PinePhone, it fails with a GLFW Error...
 
 ```bash
 $ zig build example-rotating-cube -Ddawn-from-source=true
@@ -197,17 +175,29 @@ $ glxinfo | grep "OpenGL version"
 OpenGL version string: 2.1 Mesa 22.1.3
 ```
 
-Overriding the OpenGL version doesn't help, we get the same error when we run Mach on PinePhone...
+Mach fails with a GLSL Error when we set `MESA_GL_VERSION_OVERRIDE`...
 
 ```bash
-$ export MESA_GL_VERSION_OVERRIDE=4.3
-$ glxinfo | grep "OpenGL version"
-OpenGL version string: 4.3 (Compatibility Profile) Mesa 22.1.3
-
+$ zig build example-rotating-cube -Ddawn-from-source=true
 $ export GPU_BACKEND=opengl
+$ export MESA_GL_VERSION_OVERRIDE=4.5
+
+$ glxinfo | grep 'OpenGL version'
+OpenGL version string: 4.5 (Compatibility Profile) Mesa 22.1.3
+
 $ zig-out/bin/example-rotating-cube
-glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
+mach: found OpenGL backend on Unknown adapter: Mali400, OpenGL version 4.5 (Core Profile) Mesa 22.1.3
+gpu: validation error: #version 450
+Program compilation failed:
+0:1(10): error: GLSL 4.50 is not supported. Supported versions are: 1.10, 1.20, and 1.00 ES
+ - While calling [Device].CreateRenderPipeline([RenderPipelineDescriptor]).
 ```
+
+[(See the complete log)](https://gist.github.com/lupyuen/9d3aca0d10cc6dfee0a7d3e50f14e191)
+
+This GLSL Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.4 or above.
+
+The GLFW Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.3 or below.
 
 # Pinebook Pro
 
@@ -225,6 +215,37 @@ https://github.com/lupyuen/zig-pinephone-mach#missing-arm64-atomics
 
 (Mach builds on Pinebook Pro in roughly half an hour)
 
-Mach also fails with a GLSL Error on Pinebook Pro...
+Mach fails with the same GLFW Error on Pinebook Pro...
+
+```bash
+$ zig build example-rotating-cube -Ddawn-from-source=true
+$ export GPU_BACKEND=opengl
+
+$ glxinfo | grep 'OpenGL version'
+OpenGL version string: 3.1 Mesa 22.1.3
+
+$ zig-out/bin/example-rotating-cube
+glfw: error.VersionUnavailable: GLX: Failed to create context: GLXBadFBConfig
+```
+
+[(See the complete log)](https://gist.github.com/lupyuen/46d5e398fad09ec498d8c9c93d82e03a)
+
+And it fails when we set `MESA_GL_VERSION_OVERRIDE`...
+
+```bash
+$ zig build example-rotating-cube -Ddawn-from-source=true
+$ export GPU_BACKEND=opengl
+$ export MESA_GL_VERSION_OVERRIDE=4.5
+
+$ glxinfo |  grep 'OpenGL version'
+OpenGL version string: 4.5 (Compatibility Profile) Mesa 22.1.3
+
+$ zig-out/bin/example-rotating-cube
+mach: found OpenGL backend on Unknown adapter: Mali-T860 (Panfrost), OpenGL version 4.5 (Core Profile) Mesa 22.1.3
+gpu: validation error: #version 450
+Program compilation failed:
+0:1(10): error: GLSL 4.50 is not supported. Supported versions are: 1.10, 1.20, 1.30, 1.40, 1.00 ES, and 3.00 ES
+ - While calling [Device].CreateRenderPipeline([RenderPipelineDescriptor]).
+```
 
 [(See the complete log)](https://gist.github.com/lupyuen/849491f0aef2b8ad67e8ab1ce250f067)
