@@ -223,6 +223,8 @@ The GLFW Error appears when we set `MESA_GL_VERSION_OVERRIDE` to 4.3 or below.
 
 So it seems Mach only works with OpenGL / GLSL version 4.4 and above. Which isn't supported on PinePhone.
 
+Perhaps PinePhone Pro (with Vulkan) might support Mach.
+
 # Pinebook Pro
 
 Will Mach run on Pinebook Pro?
