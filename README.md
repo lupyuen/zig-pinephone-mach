@@ -73,7 +73,7 @@ https://github.com/suptalentdev/mustang/blob/master/c-scape/aarch64_outline_atom
 
 https://docs.rs/atomic/latest/atomic/struct.Atomic.html
 
-# Fixing Missing Arm64 Atomics
+# Fix Missing Arm64 Atomics
 
 To build Mach correctly on PinePhone, apply this fix for the Missing Arm64 Atomics...
 
