@@ -227,6 +227,23 @@ So it seems Mach only works with OpenGL / GLSL version 4.4 and above. Which isn'
 
 Will Mach run on Pinebook Pro?
 
+```text
+██████████████████  ████████   luppy@pinebook 
+██████████████████  ████████   -------------- 
+██████████████████  ████████   OS: Manjaro ARM Linux aarch64 
+██████████████████  ████████   Host: Pine64 Pinebook Pro 
+████████            ████████   Kernel: 5.18.5-1-MANJARO-ARM 
+████████  ████████  ████████   Uptime: 53 mins 
+████████  ████████  ████████   Packages: 1006 (pacman) 
+████████  ████████  ████████   Shell: bash 5.1.16 
+████████  ████████  ████████   Resolution: 1920x1080 
+████████  ████████  ████████   Terminal: node 
+████████  ████████  ████████   CPU: (6) @ 1.416GHz 
+████████  ████████  ████████   Memory: 914MiB / 3868MiB 
+████████  ████████  ████████
+████████  ████████  ████████    
+```
+
 We run the same steps to build Mach on Pinebook Pro (Manjaro Xfce)...
 
 https://github.com/lupyuen/zig-pinephone-mach#build-mach
